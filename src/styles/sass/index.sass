@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap')
+
+$main: #E45D8B
+$main-back: #3C424A
+$black: #363839
+$lightgray: #9c9e9f
+$gray: #bdc1c6
+$white: #fff
+$green: #06842c
+
+*
+  font-family: Roboto
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+  &::before, &::after
+    box-sizing: border-box
+
+body
+  background: $main
+
+.todoapp
+  margin: 0 auto
+  margin-top: 60px
+  background: $main-back
+  width: 600px
+  height: 600px
+  border-radius: 5px
+  display: flex
+  flex-direction: column
+  align-items: center
+  // z-index: 5
+
+.header
+  font-size: 40px
+  text-align: center
+  color: $main
+  width: 100%
+  padding-bottom: 30px
+  position: relative
+  // border-bottom: 2px solid #343A40
+
+  &::before
+    content: ''
+    position: absolute
+    bottom: 0
+    left: 10%
+    width: 80%
+    height: 2px
+    background-color: #343A40
+
+  &__title
+    font-weight: 300
+    margin-top: 20px
+    font-size: 85px
+    text-transform: uppercase
+
+  &__input
+    padding: 16px 16px 16px 60px
+    height: 65px
+    border: none
+    position: relative
+    margin-top: 30px
+    width: 80%
+    font-size: 24px
+    font-family: inherit
+    font-weight: inherit
+    line-height: 1.4em
+    color: $main-back
+    border: 1px solid #999
+    -webkit-box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.2)
+    -moz-box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.2)
+    box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.2)
+    box-sizing: border-box
+    border-radius: 5px
+
+  &__input:focus
+    box-shadow: 0 0 2px 2px rgba(228, 93, 138, 0.603)
+    outline: 0
+
+.todoList
+  width: 80%
+  max-width: 80%
+  // border-top: 2px solid #343A40
+  // margin-top: 30px
+  list-style: none
+  overflow: auto
+  color: $white
+  font-family: inherit
+  max-height: 293px
+
+  &__elem
+    padding: 20px 0
+    box-shadow: 0px -8px 9px 0px rgba(0, 0, 0, 20%)
+    display: flex
+    align-items: center
+    position: relative
+
+  &__elem_checked
+    text-decoration: line-through
+    opacity: .8
+
+  &__elem:first-child
+    box-shadow: none
+
+  &__elem:last-child
+    border-bottom: 2px solid #343A40
+
+  // checkbox section
+
+  &__checkbox[type="checkbox"]
+    position: relative
+    width: 1.8em
+    height: 1.8em
+    border: 1px solid $gray
+    border-radius: 50%
+    appearance: none
+    outline: 0
+    cursor: pointer
+    transition: background 175ms cubic-bezier(0.1, 0.1, 0.25, 1)
+
+    &::before
+      position: absolute
+      content: ''
+      display: block
+      top: 2px
+      left: 7px
+      width: 8px
+      height: 14px
+      border-style: solid
+      border-color: $white
+      border-width: 0 2px 2px 0
+      transform: rotate(45deg)
+      opacity: 0
+
+    &:checked
+      color: $white
+      border-color: $main
+      background: $main
+
+      &::before
+        opacity: 1
+
+      ~ label::before
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%)
+
+  &__label
+    position: relative
+    cursor: pointer
+    font-size: 1.5em
+    font-weight: 600
+    padding: 0 20px
+    user-select: none
+    flex: 1 1 0
+
+    &::before
+      position: absolute
+      content: attr(data-content)
+      color: $lightgray
+      clip-path: polygon(0 0, 0 0, 0% 100%, 0 100%)
+      text-decoration: line-through
+      text-decoration-thickness: 3px
+      text-decoration-color: $black
+      transition: clip-path 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94)
+
+  &__button
+    opacity: 0
+    display: flex
+    flex-direction: row
+    justify-content: space-around
+    align-items: center
+    width: 35px
+    position: absolute
+    border: none
+    top: calc(50% - (25px / 2))
+    right: 12px
+    cursor: pointer
+    text-decoration: none
+    background-color: transparent
+    transition: 0.3s ease all
+    font-size: 16px
+    font-weight: 600
+    border: 1px solid transparent
+    padding: 3px 4px
+
+  &__empty
+    margin-top: 25px
+    display: flex
+    flex-direction: column
+    align-items: center
+    color: $white
+
+  &__empty-title
+    margin-bottom: 10px
+
+.todoList__elem:hover
+  .todoList__button
+    opacity: 1
+    color: $main
+    transition: 0.3s ease all
+    z-index: 5
+
+    &:hover
+      transition: 0.3s ease all
+      border: 1px solid $main
+
+.footer
+  display: flex
+  align-items: flex-end
+  justify-content: center
+  flex: 1 1 0
+  text-transform: uppercase
+  margin: 15px
+  position: relative
+  width: 80%
+
+  &:after
+    content: ''
+    position: absolute
+    bottom: 45px
+
+    left: 0
+    right: 0
+    border-top: 2px solid #343A40
+
+  span
+    color: $white
+    padding-bottom: 5px
+
+  button
+    font-size: 16px
+    margin-left: 10px
+    padding: 6px 8px
+    display: inline-block
+    border: 1px solid $white
+    border-radius: 2px
+    text-decoration: none
+    font-weight: 400
+    color: #000
+    text-align: center
+    transition: all 0.2s
+    animation: buttonAnime 5s infinite linear
+    position: relative
+
+  button:hover
+    cursor: pointer
+    background-color: $main-back
+    color: $white
+
+@keyframes buttonAnime
+  0%
+    top: 0em
+
+  40%
+    top: 0em
+
+  43%
+    top: -14px
+
+  46%
+    top: 0em
+
+  48%
+    top: -9px
+
+  50%
+    top: 0em
+
+  100%
+    top: 0em
